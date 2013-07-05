@@ -5,8 +5,8 @@
 -define(DIA_STATS_COUNTERS, [acr_Start, acr_Stop, acr_Interim, acr_Event, ongoing_session, finished_session]).
 -define(SESSION_TAB, session_tab).
 
--define(SERVICE, [{'Origin-Host', "server2.example2.com"},
-                  {'Origin-Realm', "example2.com"},
+-define(SERVICE(OH, OR), [{'Origin-Host', OH},
+                  {'Origin-Realm', OR},
                   {'Vendor-Id', 193},
                   {'Product-Name', "TheServer"},
                   {'Acct-Application-Id', [3]},

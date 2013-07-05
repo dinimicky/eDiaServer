@@ -14,18 +14,19 @@
 %% ====================================================================
 -export([start/1,
 		 start/2,
-		 start/3,
+		 start/5,
 		 stop/0,
 		 resume/1,
+		 resume/3,
 		 pause/0]).
 
 start(Transport) ->
-	start(Transport, ?DEFAULT_ADDR, ?DEFAULT_PORT).
+	start(Transport, ?DEFAULT_ADDR).
 start(Transport, Addr) ->
-	start(Transport, Addr, ?DEFAULT_PORT).
-start(Transport, Addr, Port) ->
+	start(Transport, Addr, ?DEFAULT_PORT, "server2.example2.com", "example2.com").
+start(Transport, Addr, Port, OH, OR) ->
 	diameter:start(),
-    ok = diameter:start_service(?SVC_NAME, ?SERVICE),
+    ok = diameter:start_service(?SVC_NAME, ?SERVICE(OH,OR)),
     sessionDB:create_session_tab(),
 	common_stats:init(?DIA_STATS_TAB, ?DIA_STATS_COUNTERS),
     {ok, _} = diameter:add_transport(?SVC_NAME, {listen, server({Transport, Addr, Port})}).
@@ -39,10 +40,11 @@ stop() ->
     diameter:stop().
 
 %% resume/1
-
 resume(T) ->
+	resume(T,"server2.example2.com", "example2.com").
+resume(T, OH, OR) ->
     diameter:start(),
-    ok = diameter:start_service(?SVC_NAME, ?SERVICE),
+    ok = diameter:start_service(?SVC_NAME, ?SERVICE(OH, OR)),
     {ok, _} = diameter:add_transport(?SVC_NAME, {listen, server(T)}).
 
 %% pause/0
