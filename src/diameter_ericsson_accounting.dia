@@ -1,0 +1,319 @@
+;;
+;; %CCaseCopyrightBegin%
+;; Copyright (c) Ericsson AB 2007-2010 All rights reserved.
+;; 
+;; The information in this document is the property of Ericsson.
+;; 
+;; Except as specifically authorized in writing by Ericsson, the 
+;; receiver of this document shall keep the information contained 
+;; herein confidential and shall protect the same in whole or in 
+;; part from disclosure and dissemination to third parties.
+;; 
+;; Disclosure and disseminations to the receivers employees shall 
+;; only be made on a strict need to know basis.
+;; %CCaseCopyrightEnd%
+;;
+
+;; Source: 3GPP TS 32.225 V5.11.0 (2006-03)
+;;        & Charging IWD (PA4)
+
+@prefix diameter_ericsson_accounting
+@id 3
+@vendor 193 Ericsson
+
+@inherits diameter_gen_base_rfc3588
+
+@avp_vendor_id 193
+
+   Ericsson-Service-Information
+   IMS-Service-Identification
+   Dial-Around-Indicator
+   SIP-Reason
+   SIP-Reason-Cause
+   SIP-Reason-Text
+   From-Header  
+   Redirecting-Party-Address   
+   Network-Call-Reference 
+   Additional-Charging-Information   
+   Media-Statistics 
+   Media-Interface-Statistics  
+   Media-Interface-Flow-Statistics
+   Packet-Loss-Rate  
+   Total-Session-Duration    
+   JB-Discard-Rate 
+   Round-Trip-Delay
+   Transaction-Data-Name
+   Transaction-Data-Value
+   Transaction-Info
+   Transaction-Type
+   User-Side
+
+@avp_vendor_id 10415
+	Called-Asserted-Identity
+	Called-Party-Address
+	Calling-Party-Address
+	Carrier-Select-Routing-Information
+	Cause-Code
+	Event
+	Event-Type
+	Expires
+	IMS-Charging-Identifier
+	IMS-Information
+	Incoming-Trunk-Group-ID
+	Inter-Operator-Identifier
+	Media-Component-Number
+	Media-Initiator-Flag
+	Node-Functionality
+	Number-Portability-Routing-Information
+	Originating-IOI
+	Outgoing-Trunk-Group-ID
+	Requested-Party-Address
+	Role-of-Node
+	SDP-Media-Component
+	SDP-Media-Description
+	SDP-Media-Name
+	SDP-Session-Description
+	Service-Information
+	SIP-Method
+	SIP-Request-Timestamp
+	SIP-Request-Timestamp-Fraction
+	SIP-Response-Timestamp
+	SIP-Response-Timestamp-Fraction
+	Terminating-IOI
+	Time-Stamps
+	Trunk-Group-ID
+	User-Session-ID
+
+@avp_types
+Accounting-Input-Octets	363	Unsigned64	M
+Accounting-Input-Packets	365	Unsigned64	M
+Accounting-Output-Octets	364	Unsigned64	M
+Accounting-Output-Packets	366	Unsigned64	M
+Service-Context-Id	461	UTF8String	M
+Called-Asserted-Identity	    	1250	UTF8String	VM
+Called-Party-Address			832	UTF8String	VM
+Calling-Party-Address			831	UTF8String	VM
+Carrier-Select-Routing-Information	2023	UTF8String	VM
+Cause-Code				861	Integer32	VM
+Event					825	UTF8String	VM
+Event-Type				823	Grouped		VM
+Expires					888	Unsigned32	VM
+IMS-Charging-Identifier			841	UTF8String	VM
+IMS-Information				876	Grouped		VM
+Incoming-Trunk-Group-ID			852	UTF8String	VM
+Inter-Operator-Identifier		838	Grouped		VM
+Media-Component-Number			518	Unsigned32	VM
+Media-Initiator-Flag			882	Enumerated	VM
+Node-Functionality			862	Enumerated	VM
+Number-Portability-Routing-Information	2024	UTF8String	VM
+Originating-IOI				839	UTF8String	VM
+Outgoing-Trunk-Group-ID			853	UTF8String	VM
+Requested-Party-Address			1251	UTF8String	VM
+Role-of-Node				829	Enumerated	VM
+SDP-Media-Component			843	Grouped		VM
+SDP-Media-Description			845	UTF8String	VM
+SDP-Media-Name				844	UTF8String	VM
+SDP-Session-Description			842	UTF8String	VM
+Service-Information			873	Grouped		VM
+SIP-Method				824	UTF8String	VM
+SIP-Request-Timestamp			834	Time		VM
+SIP-Request-Timestamp-Fraction		2301	Unsigned32	VM
+SIP-Response-Timestamp			835	Time		VM
+SIP-Response-Timestamp-Fraction		2302	Unsigned32	VM
+Terminating-IOI				840	UTF8String	VM
+Time-Stamps				833	Grouped		VM
+Trunk-Group-ID				851	Grouped		VM
+User-Session-ID				830	UTF8String	VM
+;;
+;; Ericsson acct AVPs
+;;
+Additional-Charging-Information		1298	UTF8String	VM
+Dial-Around-Indicator			1160	UTF8String	VM
+Ericsson-Service-Information		285	Grouped		VM
+From-Header				1153	UTF8String	VM
+IMS-Service-Identification		284	UTF8String	VM
+JB-Discard-Rate				1301	Unsigned32	VM
+Media-Interface-Flow-Statistics		1086	Grouped		VM
+Media-Interface-Statistics		1085	Grouped		VM
+Media-Statistics			1084	Grouped		VM
+Network-Call-Reference			1297	UTF8String	VM
+Packet-Loss-Rate			1296	Unsigned32	VM
+Redirecting-Party-Address		1133	UTF8String	VM
+Round-Trip-Delay			1300	Unsigned64	VM
+SIP-Reason				335	Grouped		VM
+SIP-Reason-Cause			336	Unsigned32	VM
+SIP-Reason-Text				337	UTF8String	VM
+Total-Session-Duration			1299	Unsigned64	VM
+Transaction-Data-Name			1266	UTF8String	VM
+Transaction-Data-Value			1267	UTF8String	VM
+Transaction-Info			1264	Grouped		VM
+Transaction-Type			1265	Enumerated	VM
+User-Side				1100	Enumerated	VM
+
+
+
+@messages
+
+ACR   ::= < Diameter Header: 271, REQ, PXY 3 >
+                < Session-Id >
+                { Origin-Host }
+                { Origin-Realm }
+                { Destination-Realm }
+                { Accounting-Record-Type }
+                { Accounting-Record-Number }
+                [ Destination-Host ]
+                [ Acct-Application-Id ]
+                [ Event-Timestamp ]
+		[ Service-Context-Id]
+		[ Service-Information]
+		[ Ericsson-Service-Information]
+				
+				
+				
+				
+
+ACA   ::= < Diameter Header: 271, PXY 3>
+                < Session-Id >
+                { Result-Code }
+                { Origin-Host }
+                { Origin-Realm }
+                { Accounting-Record-Type }
+                { Accounting-Record-Number }
+                [ Acct-Application-Id ]
+                [ Experimental-Result ]
+                [ Acct-Interim-Interval ]
+                * [ AVP ]
+
+
+@grouped
+Ericsson-Service-Information  ::= < AVP Header: 285>
+                           * [ IMS-Service-Identification ]
+                             [ Dial-Around-Indicator ]
+                             [ SIP-Reason ]
+                             [ From-Header ]
+                             [ Media-Statistics ]
+                             [ Redirecting-Party-Address ]
+                             [ Network-Call-Reference ]
+                           * [ Additional-Charging-Information]
+                           * [ Transaction-Info ]
+
+
+Event-Type ::= < AVP Header: 823 >
+               [ SIP-Method ]
+	       [ Event ]
+	       [ Expires ]
+
+IMS-Information  ::= < AVP Header: 876>
+                    { Node-Functionality }
+                    [ Event-Type ]
+                    [ Role-of-Node ]
+                    [ User-Session-ID ]
+                   *[ Calling-Party-Address ]
+                    [ Called-Party-Address ]
+                   *[ Called-Asserted-Identity ]
+                    [ Number-Portability-Routing-Information ]
+                    [ Carrier-Select-Routing-Information ]
+                    [ Requested-Party-Address ]
+                    [ Time-Stamps ]
+                    [ Inter-Operator-Identifier ]
+                    [ IMS-Charging-Identifier ]
+                   *[ SDP-Session-Description ]
+                   *[ SDP-Media-Component ]
+                    [ Trunk-Group-ID ]
+                    [ Cause-Code ]
+
+
+Inter-Operator-Identifier   ::= < AVP Header: 838 >
+                              [ Originating-IOI ]
+                              [ Terminating-IOI ]
+
+
+Media-Interface-Flow-Statistics  ::=< AVP Header: 1086 >
+				{ Media-Component-Number }
+				[ Accounting-Input-Octets ]
+				[ Accounting-Input-Packets ]
+				[ Accounting-Output-Octets ]
+				[ Accounting-Output-Packets ]
+				[ Total-Session-Duration ]
+				[ Packet-Loss-Rate ]
+				[ JB-Discard-Rate ]
+				[ Round-Trip-Delay ]
+
+
+Media-Interface-Statistics   ::= < AVP Header: 1085 >
+				  { User-Side}
+				  [ Media-Interface-Flow-Statistics]
+
+
+Media-Statistics   ::= < AVP Header: 1084 >
+      * [ Media-Interface-Statistics ]
+
+SDP-Media-Component   ::= < AVP Header: 843 >
+         [ SDP-Media-Name ]
+       * [ SDP-Media-Description ]
+         [ Media-Initiator-Flag ]
+
+Service-Information  ::= < AVP Header: 873 >
+		 [ IMS-Information ]
+
+SIP-Reason   ::= < AVP Header: 335 >
+		 [ SIP-Reason-Cause ]
+		 [ SIP-Reason-Text ]
+
+Time-Stamps   ::= < AVP Header: 833 >
+              [ SIP-Request-Timestamp ]
+              [ SIP-Response-Timestamp ]
+	      [ SIP-Request-Timestamp-Fraction ]
+	      [ SIP-Response-Timestamp-Fraction ]
+
+Transaction-Info  ::= <AVP Header: 1264 >
+		{ Transaction-Type }
+		{ Transaction-Data-Name }
+		{ Transaction-Data-Value }
+
+
+Trunk-Group-ID   ::= < AVP Header: 851 >
+         [ Incoming-Trunk-Group-ID ]
+         [ Outgoing-Trunk-Group-ID ]
+		 
+
+
+		 
+@enum Media-Initiator-Flag
+
+   called_party         0
+   calling_party        1
+   unknown              2
+
+@enum Node-Functionality
+
+        S-CSCF          0 
+        P-CSCF          1
+        I-CSCF          2
+        MRFC            3
+        MGCF            4
+        BGCF            5 
+        AS              6 
+        E-CSCF  7 
+        Exit_IBCF       8 
+        Entry_IBCF      9 
+        A-ALG           110 
+
+@enum Role-of-Node
+
+        ORIGINATING_ROLE        0 
+        TERMINATING_ROLE        1 
+        PROXY_ROLE              2 
+        B2BUA_ROLE              3 
+        ENTRY_IBCF_ROLE         4
+        EXIT_IBCF_ROLE          5
+
+@enum Transaction-Type
+	SIP_Request 		0
+	SIP_Response	 	1
+
+@enum User-Side
+	Calling_side	0
+	Called_side	1
+
+
