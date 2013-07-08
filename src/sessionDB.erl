@@ -48,7 +48,7 @@ get_resp(SID, RT, RN, Session_Tid) ->
 %% Internal functions
 %% ====================================================================
 check_sesion(Session_Tid, SID, RN) ->
-	T1 = erlang:now(),
+%% 	T1 = erlang:now(),
 	Res = case ets:lookup(Session_Tid, SID) of
 			  [] -> new_sid;
 			  [{SID, {_OldRT, OldRN}}|_] ->
@@ -57,5 +57,5 @@ check_sesion(Session_Tid, SID, RN) ->
 					  true -> old_msg
 				  end
 		  end,
-	io:format("spend ~p ms ~n", [timer:now_diff(erlang:now(), T1)/1000]),
+%% 	io:format("spend ~p ms ~n", [timer:now_diff(erlang:now(), T1)/1000]),
 	Res.

@@ -74,6 +74,7 @@ handle_request(#diameter_packet{msg = Req, errors = []}, _SvcName, {_, Caps})
                                   'Accounting-Record-Number' = RN,
                                   'Acct-Application-Id' = AI}
         = Req,
+%% 	io:format("Accounting Type:~p;Record Number:~p prepare to run sessionDB:get_resp/3~n", [RT, RN]),
     Res = sessionDB:get_resp(Id, RT, RN),
 	answer(Res, OH, OR, Id, RT, RN, AI);
 
@@ -90,6 +91,8 @@ handle_request(#diameter_packet{msg = Req} = _Pkt, _SvcName, {_, Caps})
                                       'Accounting-Record-Number' = RN,
                                       'Acct-Application-Id' = AI}
         = Req,
+	
+%% 	io:format("Accounting Type:~p;Record Number:~p~n", [RT, RN]),
 
     Ans = #diameter_ericsson_accounting_ACA{'Session-Id' = Id,
                                             'Accounting-Record-Type' = RT,
