@@ -106,7 +106,7 @@
 
 -record('diameter_ericsson_accounting_Transaction-Info',
 	{'Transaction-Type', 'Transaction-Data-Name',
-	 'Transaction-Data-Value'}).
+	 'Transaction-Data-Value' = []}).
 
 -record('diameter_ericsson_accounting_Trunk-Group-ID',
 	{'Incoming-Trunk-Group-ID' = [],

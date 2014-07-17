@@ -121,7 +121,7 @@
 
 -record('diameter_ericsson_accounting_Transaction-Info',
 	{'Transaction-Type', 'Transaction-Data-Name',
-	 'Transaction-Data-Value'}).
+	 'Transaction-Data-Value' = []}).
 
 -record('diameter_ericsson_accounting_Trunk-Group-ID',
 	{'Incoming-Trunk-Group-ID' = [],
@@ -576,7 +576,7 @@ avp_arity('Transaction-Info',
     1;
 avp_arity('Transaction-Info',
 	  'Transaction-Data-Value') ->
-    1;
+    {1, '*'};
 avp_arity('Trunk-Group-ID',
 	  'Incoming-Trunk-Group-ID') ->
     {0, 1};
@@ -1397,7 +1397,7 @@ dict() ->
 	 ["SIP-Response-Timestamp-Fraction"]]},
        {"Transaction-Info", 1264, [],
 	[{"Transaction-Type"}, {"Transaction-Data-Name"},
-	 {"Transaction-Data-Value"}]},
+	 {'*', {"Transaction-Data-Value"}}]},
        {"Trunk-Group-ID", 851, [],
 	[["Incoming-Trunk-Group-ID"],
 	 ["Outgoing-Trunk-Group-ID"]]}]},

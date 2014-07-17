@@ -269,7 +269,7 @@ Time-Stamps   ::= < AVP Header: 833 >
 Transaction-Info  ::= <AVP Header: 1264 >
 		{ Transaction-Type }
 		{ Transaction-Data-Name }
-		{ Transaction-Data-Value }
+	  * { Transaction-Data-Value }
 
 
 Trunk-Group-ID   ::= < AVP Header: 851 >
